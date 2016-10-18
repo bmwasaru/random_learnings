@@ -1,10 +1,8 @@
-fibonacci_cache = {}
+from functools import lru_cache
 
 
+@lru_cache(maxsize=2000)
 def fibonacci(n):
-    if n in fibonacci_cache:
-        return fibonacci_cache[n]
-
     if n == 1:
         value = 1
     elif n == 2:
@@ -12,9 +10,7 @@ def fibonacci(n):
     elif n > 2:
         value = fibonacci(n-1) + fibonacci(n-2)
 
-    fibonacci_cache[n] = value
-
     return value
 
 for n in range(1, 50):
-    print(fibonacci(n))
+    print(n, ":", fibonacci(n))
